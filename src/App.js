@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import useStore from './store/useStore';
+import CommentForm from './Components/CommentForm';
+import CommentList from './Components/CommentList';
 
-function App() {
+const App = () => {
+  const { 
+    comments, 
+    replies, 
+    addComment, 
+    editComment, 
+    deleteComment, 
+    addReply, 
+    editReply, 
+    deleteReply 
+  } = useStore();
+
+  const handleEdit = (id, newText) => {
+    if (comments.some(comment => comment.id === id)) {
+      editComment(id, newText);
+    } else {
+      editReply(id, newText);
+    }
+  };
+
+  const handleDelete = (id) => {
+    if (comments.some(comment => comment.id === id)) {
+      deleteComment(id);
+      replies.forEach(reply => {
+        if (reply.parentId === id) {
+          deleteReply(reply.id);
+        }
+      });
+    } else {
+      deleteReply(id);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Comments</h1>
+      <CommentForm onSubmit={addComment} />
+      <CommentList 
+        comments={comments}
+        replies={replies}
+        onReply={addReply}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     </div>
   );
-}
+};
 
 export default App;
