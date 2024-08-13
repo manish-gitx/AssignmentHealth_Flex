@@ -10,12 +10,17 @@ const CommentList = ({ comments, replies, onReply, onEdit, onDelete }) => {
       : new Date(a.date) - new Date(b.date);
   });
 
+
   return (
-    <div>
+      <>
+
+      <div className='select_container'>
       <select onChange={(e) => setSortOrder(e.target.value)}>
         <option value="desc">Newest First</option>
         <option value="asc">Oldest First</option>
       </select>
+      </div>
+      <div>
       {sortedComments.map(comment => (
         <Comment 
           key={comment.id} 
@@ -26,7 +31,10 @@ const CommentList = ({ comments, replies, onReply, onEdit, onDelete }) => {
           onDelete={onDelete}
         />
       ))}
-    </div>
+      </div>
+    </>
+   
+    
   );
 };
 

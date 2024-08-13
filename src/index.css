@@ -47,9 +47,13 @@ button {
 button:hover {
   background-color: #166fe5;
 }
+.select_container{
+  display: flex;
+  justify-content: end;
+  align-items: end;
 
-select {
-  float: right;
+}
+select {  
   margin-bottom: 10px;
   padding: 5px;
   border: 1px solid #dddfe2;
