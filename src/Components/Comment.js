@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import ReplyForm from './ReplyForm';
 import Reply from './Reply';
 import formatDate from '../utils/Dateutils'
-import del from "../Assests/del.svg"
+import { ReactComponent as DelIcon } from '../Assests/del.svg';
+
+
+
 const Comment = ({ comment, replies, onReply, onEdit, onDelete }) => {
   const [isReplying, setIsReplying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -25,6 +28,7 @@ const Comment = ({ comment, replies, onReply, onEdit, onDelete }) => {
 
   return (
     <div className="comment">
+      <div className='comment_main'>
       <h4>{comment.name}</h4>
       <span>{formatDate(comment.date)}</span>
       {isEditing ? (
@@ -35,11 +39,16 @@ const Comment = ({ comment, replies, onReply, onEdit, onDelete }) => {
         </div>
       ) : (
         <p>{comment.text}</p>
+
       )}
-      <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
+            <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
       <button onClick={() => setIsReplying(!isReplying)}>Reply</button>
-      <button onClick={() => onDelete(comment.id)}>Delete</button>
+      <button className='del' onClick={() => onDelete(comment.id)}><DelIcon /></button>
       {isReplying && <ReplyForm onSubmit={handleReply} onCancel={() => setIsReplying(false)} />}
+        
+      </div>
+     
+
       {replies.map(reply => (
         <Reply 
           key={reply.id} 

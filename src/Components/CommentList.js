@@ -13,7 +13,6 @@ const CommentList = ({ comments, replies, onReply, onEdit, onDelete }) => {
 
   return (
       <>
-
       <div className='select_container'>
       <select onChange={(e) => setSortOrder(e.target.value)}>
         <option value="desc">Newest First</option>

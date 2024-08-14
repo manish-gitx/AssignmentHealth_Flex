@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import formatDate from '../utils/Dateutils'
+import { ReactComponent as DelIcon } from '../Assests/del.svg';
+
 
 
 const Reply = ({ reply, onEdit, onDelete }) => {
@@ -26,7 +28,7 @@ const Reply = ({ reply, onEdit, onDelete }) => {
         <p>{reply.text}</p>
       )}
       <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
-      <button onClick={() => onDelete(reply.id)}>Delete</button>
+      <button className='del' onClick={() => onDelete(reply.id)}><DelIcon/></button>
     </div>
   );
 };
